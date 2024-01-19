@@ -4,36 +4,28 @@ version: '3'
 
 services:
   gitea-db:
-    image: postgres:latest
+    image: postgres:alpine
     container_name: gitea-db
     restart: always
-    environment:
-      - POSTGRES_USER=giteadb
-      - POSTGRES_PASSWORD=giteadb
-      - POSTGRES_DB=gitea
-    networks:
-      - dev-net
+    env_file:
+      - ./postgres/variables.env
     volumes:
       - db-data:/var/lib/postgresql/data
+    networks:
+      - dev-net
 
   gitea:
     image: gitea/gitea:latest
     container_name: gitea
-    environment:
-      - USER_UID=1000
-      - USER_GID=1000
-      - GITEA__database__DB_TYPE=postgres
-      - GITEA__database__HOST=gitea-db:5432
-      - GITEA__database__NAME=gitea
-      - GITEA__database__USER=giteadb
-      - GITEA__database__PASSWD=giteadb
     restart: always
-    networks:
-      - dev-net
+    env_file:
+      - ./gitea/variables.env
     volumes:
       - gitea-data:/data
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
+    networks:
+      - dev-net
     ports:
       - '3000:3000'
       - '2222:22'
