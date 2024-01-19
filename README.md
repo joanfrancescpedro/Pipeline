@@ -1,9 +1,9 @@
+> [!WARNING]  
+> This repository is under construction yet.
+
 # AUTOMATED PIPELINE
 
 ![Static Badge](https://img.shields.io/badge/Author-Joan%20Francesc%20Pedro-blue?style=for-the-badge)
-
-> [!WARNING]  
-> This repository is under construction yet.
 
 This is a project created for the automation of pipelines with a personal git environment (Gitea), where Jenkins (Installed in another container) automatically detects the push you make, and makes the testing, analysis of code and the final package, to finally install the code in the Docker container of "Testing".
 
