@@ -8,24 +8,24 @@ services:
     container_name: gitea-db
     restart: always
     env_file:
-      - ./postgres/variables.env
+      - ./postgres/variables-postgres.env
     volumes:
       - db-data:/var/lib/postgresql/data
     networks:
-      - dev-net
+      - DevOps-net
 
   gitea:
     image: gitea/gitea:latest
     container_name: gitea
     restart: always
     env_file:
-      - ./gitea/variables.env
+      - ./gitea/variables-gitea.env
     volumes:
       - gitea-data:/data
       - /etc/timezone:/etc/timezone:ro
       - /etc/localtime:/etc/localtime:ro
     networks:
-      - dev-net
+      - DevOps-net
     ports:
       - '3000:3000'
       - '2222:22'
@@ -39,12 +39,22 @@ services:
   #  build:
   #    context: ./Jenkins
   #  networks:
-  #    - dev-net
+  #    - DevOps-net
   #  ports:
   #    - '8080:8080'
   #  depends_on:
   #    - gitea
 
+  jenkins:
+    image: jenkins/jenkins:alpine
+    container_name: jenkins
+    restart: always
+    networks:
+      - DevOps-net
+    ports:
+      - '8080:8080'
+    depends_on:
+      - gitea
 
 volumes:
   db-data:
@@ -55,7 +65,7 @@ volumes:
     driver: local
 
 networks:
-  dev-net:
+  DevOps-net:
     driver: bridge
-    name: dev-net 
+    name: DevOps-net 
     external: false

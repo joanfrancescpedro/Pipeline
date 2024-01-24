@@ -1,0 +1,19 @@
+## Docker compose file created by: Joan Francesc Pedro
+
+version: '3'
+
+services:
+  back:
+  front:
+  db:
+
+volumes:
+  back-data:
+  front-data:
+  db-data:
+
+networks:
+  testing-net:
+    driver: bridge
+    name: testing-net 
+    external: false

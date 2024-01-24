@@ -31,7 +31,7 @@ git clone https://github.com/joanfrancescpedro/Pipeline.git
 ## ROADMAP TO-DO
 
 - Finalize docker compose setup
-- Automatize automation of wizards
+- Automatize wizards
 - Create a new project in github as template for the system
 - automatize repository importation to gitea
 - Create pipeline for the repositories
