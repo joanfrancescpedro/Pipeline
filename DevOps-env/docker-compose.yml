@@ -32,23 +32,12 @@ services:
     depends_on:
       - gitea-db
 
-  #jenkins:
-  #  image: joanfrancescpedro/jenkins
-  #  container_name: jenkins
-  #  restart: always
-  #  build:
-  #    context: ./Jenkins
-  #  networks:
-  #    - DevOps-net
-  #  ports:
-  #    - '8080:8080'
-  #  depends_on:
-  #    - gitea
-
   jenkins:
     image: jenkins/jenkins:alpine
     container_name: jenkins
     restart: always
+    env_file:
+      - ./jenkins/variables-jenkins.env
     networks:
       - DevOps-net
     ports:
